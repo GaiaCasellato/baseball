@@ -28,16 +28,18 @@ class Controller:
         teams = self._model.getTeamsOfYear(self._view._ddAnno.value)
         self._view._txtOutSquadre.controls.clear()
         self._view._txtOutSquadre.controls.append(ft.Text(f"Ho trovato {len(teams)}"
-                                                          f"squadre che hanno giocato nel {self._view._ddAnno.value}"))
+                                                          f" squadre che hanno giocato nel {self._view._ddAnno.value}"))
         for t in teams:
             self._view._txtOutSquadre.controls.append(ft.Text(f"{t.teamCode}"))
             self._view._ddSquadra.options.append(
                 ft.dropdown.Option(data= t, text= t.teamCode, on_click= self.readDDTeams)
             )
+        self._view.update_page()
 
     def fillDDYears(self):
         years = self._model.getYears()
         for year in years:
             self._view._ddAnno.options.append(ft.dropdown.Option(year))
+        self._view.update_page()
 
             # yearsDD = map(lambda x: ft.dropdown.Option(x), years) è la stessa cosa
